@@ -4,6 +4,11 @@ const { MarkovMachine } = require('./markov');
 const { argv } = require('process');
 const axios = require('axios');
 async function main() {
+
+  function exitProcess(code) {
+    process.exit(code);
+  }
+
   function createPath(path) {
     if (path.startsWith('./') || path.startsWith('../')) {
       return path;
@@ -18,7 +23,7 @@ async function main() {
     }
     catch (err) {
       console.log(err);
-      process.exit(1);
+      exitProcess(1);
     }
   }
 
@@ -30,7 +35,7 @@ async function main() {
       console.log(text);
     } catch (err) {
       console.log(err);
-      process.exit(1);
+      exitProcess(1);
     }
   }
 
@@ -42,7 +47,7 @@ async function main() {
     }
     catch (err) {
       console.log(`Cannot read URL: ${url}: ${err}`);
-      process.exit(1);
+      exitProcess(1);
     }
   }
 
@@ -54,8 +59,8 @@ async function main() {
   }
   else {
     console.log('Please enter a valid command');
-    process.exit(1);
+    exitProcess(1);
   }
-  process.exit(0);
+  exitProcess(0);
 }
 main();
